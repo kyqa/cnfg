@@ -25,7 +25,6 @@ game.RunService.Stepped:Connect(function()
     local Logo = Message.Parent.Transition.NameLogo
     local Replay = Message.Parent.Transition.Message
     
-    Logo.ImageColor3 = Color3.fromRGB(155,0,255)
     if Message.Parent:FindFirstChild("ReplayDetails") then
        Message.Parent.ReplayDetails:Destroy() 
     end
