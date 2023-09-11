@@ -8,42 +8,46 @@ writefile("Pclock.txt", s.Playclock.TextLabel.Text)
 writefile("Status.txt", s.Status.Text)
 writefile("Homescore.txt", s.HomeScore.TextLabel.Text)
 writefile("Awayscore.txt", s.AwayScore.TextLabel.Text)
-writefile('FGYards.txt', s.Yardline.Text)
+
+
+
 
 game.RunService.Stepped:Connect(function()
-
+    writefile('Yardline.txt', Message.Text)
+    
+    Message.Font = Enum.Font.JosefinSans
+    Message.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Message.TextScaled = false
+    Message.TextSize = 65.000
+    Message.TextWrapped = true
+    Message.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+    
+    local Logo = Message.Parent.Transition.NameLogo
+    local Replay = Message.Parent.Transition.Message
+    
+    Logo.ImageColor3 = Color3.fromRGB(155,0,255)
+    if Message.Parent:FindFirstChild("ReplayDetails") then
+       Message.Parent.ReplayDetails:Destroy() 
+    end
 end)
 
 s.Clock:GetPropertyChangedSignal("Text"):Connect(function()
-    local clockDataLine = s.Clock.Text
-    writefile("Clock.txt", clockDataLine)
+writefile("Clock.txt", s.Clock.Text)
+end)
+
+
+s.Status:GetPropertyChangedSignal("Text"):Connect(function()
+writefile("Status.txt", s.Status.Text)
 end)
 
 s.Playclock.TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-    local playclockDataLine = s.Playclock.TextLabel.Text
-    writefile("Pclock.txt", playclockDataLine)
-end)
-
-s.Status:GetPropertyChangedSignal("Text"):Connect(function()
-    local statusDataLine = s.Status.Text
-    writefile("Status.txt", statusDataLine)
+writefile("Pclock.txt", s.Playclock.TextLabel.Text)
 end)
 
 s.HomeScore.TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-    local homeScoreDataLine = s.HomeScore.TextLabel.Text
-    writefile("Homescore.txt", homeScoreDataLine)
+writefile("Homescore.txt", s.HomeScore.TextLabel.Text)
 end)
 
 s.AwayScore.TextLabel:GetPropertyChangedSignal("Text"):Connect(function()
-    local awayScoreDataLine = s.AwayScore.TextLabel.Text
-    writefile("Awayscore.txt", awayScoreDataLine)
-end)
-
-s.Yardline:GetPropertyChangedSignal("Text"):Connect(function()
-    local yardlineDataLine = s.Yardline.Text
-    writefile("Yardline.txt", yardlineDataLine)
-end)
-
-game:GetService("RunService").Heartbeat:Connect(function()
-    -- Additional logic to be executed every frame
+writefile("Awayscore.txt", s.AwayScore.TextLabel.Text)
 end)
